@@ -20,8 +20,7 @@ func main() {
 		return
 	}
 
-	_, err = tea.NewProgram(chat).Run()
-	if err != nil {
+	if _, err = tea.NewProgram(chat).Run(); err != nil {
 		slog.Error("run", slog.Any("error", err))
 		return
 	}
