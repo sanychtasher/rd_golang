@@ -19,7 +19,7 @@ func (c *Chat) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 	switch msg := msg.(type) {
 	case tea.KeyMsg:
 		switch msg.Type {
-		case tea.KeyEsc, tea.KeyCtrlO:
+		case tea.KeyEsc, tea.KeyCtrlC:
 			c.byeMessage()
 			return c, tea.Quit
 		case tea.KeyEnter:
@@ -36,11 +36,11 @@ func (c *Chat) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 
 func (c *Chat) View() string {
 	if len(c.history) == 0 {
-		return c.textInput.View()
+		return fmt.Sprintf("%s\nTo leave the chat, press ESC or Ctrl+C", c.textInput.View())
 	}
 
 	return fmt.Sprintf(
-		"%s\n%s",
+		"%s\n%s\nTo leave the chat, press ESC or Ctrl+C",
 		strings.Join(c.history, "\n"),
 		c.textInput.View(),
 	)
